@@ -1,0 +1,33 @@
+confirmonquit: false
+git:
+  autofetch: true
+  merging:
+    manualcommit: false
+  skiphookprefix: WIP
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never --24-bit-color=never --theme="OneHalfDark"
+gui:
+  commitlength:
+    show: true
+  mouseevents: false
+  scrollheight: 2
+  scrollpastbottom: true
+  skipStashWarning: true
+  splashupdatesindex: 0
+  theme:
+    lightTheme: false
+    activeBorderColor:
+      - cyan
+      - bold
+    inactiveBorderColor:
+      - white
+    optionsTextColor:
+      - reverse
+    selectedLineBgColor:
+      - reverse
+    selectedRangeBgColor:
+      - reverse
+reporting: "off"
+skipUnstageLineWarning: false
+startuppopupversion: 1
