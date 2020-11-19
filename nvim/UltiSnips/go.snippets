@@ -1,0 +1,55 @@
+# ====================
+# ==================== 注释相关
+# ====================
+
+snippet packagedoc "包注释" bw
+// @Title $1
+// @Description $2
+// @Author ${3:`!v g:snips_author`} ${4:`!v strftime('%Y-%m-%d')`}
+// @Update ${5:`!v g:snips_author`} ${6:`!v strftime('%Y-%m-%d')`}
+package ${1:name}
+endsnippet
+
+snippet funcdoc "函数注释" b
+// @title $1
+// @description ${4:description}
+// @auth ${5:`!v g:snips_author`} ${6:`!v strftime('%Y-%m-%d')`}
+// @param $2
+// @return $3
+func ${1:name}(${2:params})${3/(.+)/ /}${3:type} {
+  ${0:${VISUAL}}
+}
+endsnippet
+
+snippet mainswag "swagger main函数注释" b
+// @title ${1:标题}
+// @version ${2:1.0}
+// @description ${3:描述信息}
+// @termsOfService ${4:服务的团队}
+
+// @contact.name ${5:`!v g:snips_author`}
+// @contact.url ${6:http://blog.leecoding.club}
+// @contact.email ${7:644052732@qq.com}
+
+// @license.name ${8:Apache 2.0}
+// @license.url ${9:http://www.apache.org/licenses/LICENSE-2.0.html}
+
+// @host ${10:端口}
+// @BasePath ${11:API公共前缀}
+endsnippet
+
+snippet funcswag "swagger 接口注释" b
+// ${1:funcname 函数注释}
+// @Summary ${2:简介}
+// @Description ${3:描述信息}
+// @Tags ${4:分组}
+// @Accept ${5:接口请求内容编码类型}
+// @Produce ${6:接口返回相应编码类型}
+// @Security ${7:ApiKeyAuth}
+// @Success ${8: 状态码 响应的数据格式 响应数据的具体类型}
+// @Router ${9:/router [get]}
+endsnippet
+
+snippet Param "swagger Param" b
+// @Param
+endsnippet
