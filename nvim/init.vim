@@ -201,8 +201,8 @@ noremap <silent> J 5j
 "noremap <silent> I $
 
 " Faster in-line navigation
-noremap W 5w
-noremap B 5b
+"noremap W 5w
+"noremap B 5b
 
 " set h (same as n, cursor left) to 'end of word'
 "noremap h e
