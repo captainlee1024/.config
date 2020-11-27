@@ -624,6 +624,7 @@ let g:coc_global_extensions = [
 	\ 'coc-tasks',
 	\ 'coc-todolist',
 	\ 'coc-translator',
+	\ 'coc-eslint',
 	\ 'coc-tslint-plugin',
 	\ 'coc-tsserver',
 	\ 'coc-vimlsp',
