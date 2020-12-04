@@ -10,17 +10,6 @@ snippet packagedoc "包注释" bw
 package ${1:name}
 endsnippet
 
-snippet funcdoc "函数注释" b
-// @title $1
-// @description ${4:description}
-// @auth ${5:`!v g:snips_author`} ${6:`!v strftime('%Y-%m-%d')`}
-// @param $2
-// @return $3
-func ${1:name}(${2:params})${3/(.+)/ /}${3:type} {
-  ${0:${VISUAL}}
-}
-endsnippet
-
 snippet mainswag "swagger main函数注释" b
 // @title ${1:标题}
 // @version ${2:1.0}
