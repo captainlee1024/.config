@@ -130,7 +130,7 @@ let mapleader=" "
 noremap ; :
 
 " Save & quit
-noremap Q :q<CR>
+noremap Q :wq<CR>
 noremap <C-q> :qa<CR>
 noremap S :w<CR>
 noremap <c-b> :source $MYVIMRC<CR>
