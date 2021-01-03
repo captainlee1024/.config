@@ -130,7 +130,7 @@ let mapleader=" "
 noremap ; :
 
 " Save & quit
-noremap Q :wq<CR>
+noremap Q :q<CR>
 noremap <C-q> :qa<CR>
 noremap S :w<CR>
 noremap <c-b> :source $MYVIMRC<CR>
@@ -466,6 +466,9 @@ Plug 'posva/vim-vue'
 
 " Go
 Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
+
+" Rust
+Plug 'rust-lang/rust.vim'
 
 " Python
 " Plug 'tmhedberg/SimpylFold', { 'for' :['python', 'vim-plug'] }
@@ -1027,6 +1030,7 @@ noremap \t :RustFmt<CR>
 "noremap <c-b> :sp<CR>:term cargo build<CR>
 noremap \b :sp<CR>:term cargo build<CR>
 noremap \r :sp<CR>:term cargo run<CR>
+noremap \c :sp<CR>:term cargo check<CR>
 
 " ===
 " === OmniSharp
