@@ -87,6 +87,7 @@
   "json.format.enable": true,
   "eslint.autoFixOnSave": false,
 	"vetur.validation.interpolation": true,
+	"vetur.experimental.templateInterpolationService": true,
   "typescript.format.enabled": true,
   "typescript.suggestionActions.enabled": true,
 	"prettier.printWidth": 100,
