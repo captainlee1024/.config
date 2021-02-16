@@ -402,6 +402,8 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'bling/vim-bufferline'
 Plug 'bpietravalle/vim-bolt'
 Plug 'theniceboy/vim-deus'
+" onedark 主题
+Plug 'joshdick/onedark.vim'
 
 " Status line
 Plug 'theniceboy/eleline.vim'
@@ -568,6 +570,9 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 "let g:one_allow_italics = 1
 
 color deus
+
+"syntax on
+"colorscheme onedark
 
 hi NonText ctermfg=gray guifg=grey10
 "hi SpecialKey ctermfg=blue guifg=grey70
