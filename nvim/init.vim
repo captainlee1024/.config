@@ -387,6 +387,10 @@ func! CompileRunGcc()
 		set splitbelow
 		:sp
 		:term go run .
+	elseif &filetype == 'rust'
+		set splitbelow
+		:sp
+		:term cargo run
 	endif
 endfunc
 
@@ -569,10 +573,10 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 "let g:oceanic_next_terminal_italic = 1
 "let g:one_allow_italics = 1
 
-color deus
+"color deus
 
-"syntax on
-"colorscheme onedark
+syntax on
+colorscheme onedark
 
 hi NonText ctermfg=gray guifg=grey10
 "hi SpecialKey ctermfg=blue guifg=grey70
