@@ -616,6 +616,8 @@ nnoremap <LEADER>g= :GitGutterNextHunk<CR>
 let g:coc_global_extensions = [
 	\ 'coc-go',
 	\ 'coc-rust-analyzer',
+	\ 'coc-clangd',
+	\ 'coc-cmake',
 	\ 'coc-sql',
 	\ 'coc-actions',
 	\ 'coc-css',

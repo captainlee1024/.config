@@ -20,7 +20,7 @@ source ~/.config/zsh/.p10k-robbyrussell.zsh
 export GOPATH=/home/lee/goworkspace
 export PATH=$PATH:$GOPATH/bin
 # 配置gomodule
-export GO111MODULE=auto
+export GO111MODULE=on
 
 # 配置go代理
 export GOPROXY="https://goproxy.cn,direct"
