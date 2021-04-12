@@ -1,0 +1,122 @@
+" 注释
+" insertMode -> imap
+" normalMode -> nmap
+" visualMode -> vnoremap 可视模式下禁止递归的映射"
+" no recursive -> nnoremap 没有递归映射
+
+set ideajoin
+set scrolloff=4
+" 设置<LEADER>键为<SPACE>空格
+let mapleader=" "
+
+" 禁用方向键
+inoremap <Up> <Nop>
+nnoremap <Up> <Nop>
+inoremap <Down> <Nop>
+nnoremap <Down> <Nop>
+inoremap <Right> <Nop>
+nnoremap <Right> <Nop>
+inoremap <Left> <Nop>
+nnoremap <Left> <Nop>
+
+
+
+" save & quit
+noremap Q :q<CR>
+noremap S :w<CR>
+
+" 正常模式下复制一行
+nnoremap Y y$
+
+" 可视模式下复制选中的内容到系统粘贴板
+vnoremap Y "+y
+
+" 光标移动
+noremap K 5k
+noremap J 5j
+
+" 光标不动，移动屏幕内容
+noremap <C-k> 5<C-y>
+noremap <C-j> 5<C-e>
+noremap <S-h> <S-h>zz
+noremap <S-l> <S-l>zz
+
+" 光标所在行提至屏幕中央
+noremap <C-c> zz
+
+inoremap <C-a> <ESC>A
+inoremap <C-i> <ESC>I
+nnoremap <C-a> $
+nnoremap <C-i> 0
+
+" 禁用s
+nnoremap s <Nop>
+
+" 分屏和调整大小
+" split the screens to up (horizontal), down (horizontal), left (vertical), right (vertical)
+noremap sk :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
+noremap sj :set splitbelow<CR>:split<CR>
+noremap sh :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
+noremap sl :set splitright<CR>:vsplit<CR>
+
+" Resize splits with arrow keys
+" noremap <up> :res +5<CR>
+" noremap <down> :res -5<CR>
+" noremap <left> :vertical resize-5<CR>
+" noremap <right> :vertical resize+5<CR>
+
+" Place the two screens up and down
+noremap su <C-w>t<C-w>K
+" Place the two screens side by side
+noremap sv <C-w>t<C-w>H
+
+" 标签切换
+noremap tk gt
+noremap tj gT
+
+" 其他工具快捷键
+noremap ff :action ActivateProjectToolWindow<CR>
+" 文件结构
+noremap <LEADER>v :action ActivateStructureToolWindow<CR>
+" 终端
+noremap <LEADER>/ :action ActivateTerminalToolWindow<CR>
+" Find Usage
+cnoremap fu :action FindUsages<CR>
+" choose run
+nnoremap <Leader>cr :action ChooseRunConfiguration<CR>
+" choose debug
+nnoremap <Leader>cd :action ChooseDebugConfiguration<CR>
+" 重运行
+nnoremap <Leader>rr :action Rerun<CR>
+" nnoremap <Leader>si :action StepInto<CR>
+" 重命令元素
+nnoremap <Leader>re :action RenameElement<CR>
+" 重命名文件
+nnoremap <Leader>rf :action RenameFile<CR>
+
+
+" Git
+noremap <LEADER>gh :action ActivateVersionControlToolWindow<CR>
+" commit
+noremap <LEADER>gc :action ActivateCommitToolWindow<CR>
+" PR
+noremap <LEADER>gp :action ActivatePullRequestsToolWindow<CR>
+
+" Databases
+noremap <LEADER>wm :action ActivateDatabaseToolWindow<CR>
+" Cargo
+noremap <LEADER>wc :action ActivateCargoToolWindow<CR>
+" Problems
+noremap <LEADER>wp :action ActivateProblemsViewToolWindow<CR>
+" TODO
+noremap <LEADER>wt :action ActivateTODOToolWindow<CR>
+" Run Win
+noremap <LEADER>wr :action ActivateRunToolWindow<CR>
+" Debug win
+noremap <LEADER>wd :action ActivateDebugToolWindow<CR>
+" Build win
+noremap <LEADER>wb :action ActivateBuildToolWindow<CR>
+" Find
+noremap <LEADER>wf :action ActivateFindToolWindow<CR>
+" EventLog
+noremap <LEADER>we :action ActivateEventLogToolWindow<CR>
