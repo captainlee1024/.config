@@ -26,6 +26,7 @@ export GO111MODULE=on
 export GOPROXY="https://goproxy.cn,direct"
 
 export PATH="$HOME/.cargo/bin:$PATH"
+LD_LIBRARY_PATH=/usr/lib/openssl-1.0:/home/lee/project/ChainMaker/chainmaker-go/common/crypto/paillier/clibs
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
