@@ -15,6 +15,9 @@ fi
 #[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 source ~/.config/zsh/.p10k-robbyrussell.zsh
 
+# load module
+#source /home/lee/sometools/modules-4.7.1/init/profile.sh
+
 
 # 配置gopath
 export GOPATH=/home/lee/goworkspace
@@ -23,10 +26,15 @@ export PATH=$PATH:$GOPATH/bin
 export GO111MODULE=on
 
 # 配置go代理
-export GOPROXY="https://goproxy.cn,direct"
+#export GOPROXY="https://goproxy.cn,direct"
+# export GOPROXY="https://127.0.0.1:8880,direct"
+# export GOPROXY="https://localhost:8880"
+#export GOPROXY="http://192.168.12.27:8880,direct"
+export GOPROXY="https://goproxy.io,direct"
+#export GOPRIVATE="chainmaker.org"
 
 export PATH="$HOME/.cargo/bin:$PATH"
-LD_LIBRARY_PATH=/usr/lib/openssl-1.0:/home/lee/project/ChainMaker/chainmaker-go/common/crypto/paillier/clibs
+#LD_LIBRARY_PATH=/usr/lib/openssl-1.0:/home/lee/project/ChainMaker/chainmaker-go/common/crypto/paillier/clibs
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,

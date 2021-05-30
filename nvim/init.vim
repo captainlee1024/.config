@@ -409,6 +409,7 @@ Plug 'theniceboy/vim-deus'
 " onedark 主题
 Plug 'joshdick/onedark.vim'
 Plug 'sainnhe/sonokai'
+Plug 'morhetz/gruvbox'
 
 " Status line
 Plug 'theniceboy/eleline.vim'
@@ -490,8 +491,8 @@ Plug 'dart-lang/dart-vim-plugin'
 Plug 'f-person/pubspec-assist-nvim', { 'for' : ['pubspec.yaml'] }
 
 " Swift
-Plug 'keith/swift.vim'
-Plug 'arzg/vim-swift'
+" Plug 'keith/swift.vim'
+" Plug 'arzg/vim-swift'
 
 " Markdown
 Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
@@ -578,7 +579,10 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 syntax on
 "colorscheme onedark
-colorscheme sonokai
+"colorscheme sonokai
+colorscheme gruvbox
+
+set background=dark
 
 hi NonText ctermfg=gray guifg=grey10
 "hi SpecialKey ctermfg=blue guifg=grey70
@@ -687,7 +691,7 @@ omap ac <Plug>(coc-classobj-a)
 nnoremap <silent> <space>y :<C-u>CocList -A --normal yank<cr>
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
-" nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <leader>rn <Plug>(coc-rename)
 nmap ff :CocCommand explorer<CR>
