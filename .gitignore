@@ -31,3 +31,6 @@
 
 # 添加niri配置文件
 !/niri/
+
+# 添加alacritty配置文件
+!/alacritty/

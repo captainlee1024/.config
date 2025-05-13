@@ -1,0 +1,17 @@
+[general]
+import = [
+    "~/.config/alacritty/themes/themes/gruvbox_dark.toml"
+]
+
+[font]
+normal = { family="JetBrainsMono Nerd Font", style="Regular" }
+size = 13
+
+[window]
+decorations = "Buttonless"
+# 不透明度
+opacity=0.8
+
+[scrolling]
+# 滚动的缓冲区最大行数, 0: 禁用滚动, 最大限制100000, 默认10000
+history=10000
