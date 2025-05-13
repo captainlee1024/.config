@@ -1,11 +1,41 @@
+"" Source your .vimrc
+"source ~/.vimrc
+"" -- Suggested options --
+" Show a few lines of context around the cursor. Note that this makes the
+" text scroll if you mouse-click near the start or end of the window.
+" set scrolloff=5
+
+" Do incremental searching.
+" set incsearch
+
+" Don't use Ex mode, use Q for formatting.
+" map Q gq
+
+
+"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
+"" Map \r to the Reformat Code action
+"map \r <Action>(ReformatCode)
+
+"" Map <leader>d to start debug
+"map <leader>d <Action>(Debug)
+
+"" Map \b to toggle the breakpoint on the current line
+"map \b <Action>(ToggleLineBreakpoint)
+
+
+" Find more examples here: https://jb.gg/share-ideavimrc
+
 " 注释
 " insertMode -> imap
 " normalMode -> nmap
 " visualMode -> vnoremap 可视模式下禁止递归的映射"
 " no recursive -> nnoremap 没有递归映射
 
+set hlsearch
 set ideajoin
 set scrolloff=4
+" 清除高亮
+nnoremap <Leader>sc :nohlsearch<CR>
 " 设置<LEADER>键为<SPACE>空格
 let mapleader=" "
 
@@ -31,6 +61,9 @@ nnoremap Y y$
 " 可视模式下复制选中的内容到系统粘贴板
 vnoremap Y "+y
 
+" 代替esc快速退出insert模式
+inoremap jj <Esc>
+
 " 光标移动
 noremap K 5k
 noremap J 5j
@@ -48,6 +81,7 @@ inoremap <C-a> <ESC>A
 inoremap <C-i> <ESC>I
 nnoremap <C-a> $
 nnoremap <C-i> 0
+inoremap <C-l> <ESC>la
 
 " 禁用s
 nnoremap s <Nop>
@@ -66,34 +100,105 @@ noremap sl :set splitright<CR>:vsplit<CR>
 " noremap <right> :vertical resize+5<CR>
 
 " Place the two screens up and down
-noremap su <C-w>t<C-w>K
+noremap su <C-w>t<C-w>k
 " Place the two screens side by side
 noremap sv <C-w>t<C-w>H
-
 " 标签切换
 noremap tk gt
 noremap tj gT
 
 " 其他工具快捷键
 noremap ff :action ActivateProjectToolWindow<CR>
+" 切换侧边栏可见性, 接近vscode的fe 只不过这里是针对所有的window
+noremap fe :action HideAllWindows<CR>
+"noremap fe :action HideSideWindows<CR>
+" 关闭
+"nmap fe :action HideActiveWindow<CR>
+
+" 切换底部面板（类似 VSCode 的 togglePanel）, 这个应该是会关闭上一个活动的window
+noremap fb :action HideSideWindows<CR>
+"noremap fb :action HideAllWindows<CR>
+"nmap fb :action ToggleFullScreen<CR>  " IntelliJ 无直接等价，调整为全屏切换
+
+" 禅模式
+nmap <leader>z :action ToggleZenMode<CR>
+" full scree
+"nmap <leader>z :action ToggleFullScreen<CR>
+" 演示模式, UI字体等会放的很大
+"nmap <leader>z :action TogglePresentationMode<CR>
+" Distraction Free Mode 仅保留editor, 但是代码不会居中
+"nmap <leader>z :action ToggleDistractionFreeMode<CR>
+
+" 映射 <Leader>tt 切换 Tool Window Bars UI的显示和隐藏
+nnoremap <Leader>tt :action ViewToolButtons<CR>
+"nnoremap <Leader>tt <C-A-w>
+" 映射 <Leader>tb 切换 Toolbar
+nnoremap <Leader>tb :action ViewToolBar<CR>
+" 映射 <Leader>ts 切换 Status Bar
+nnoremap <Leader>ts :action ViewStatusBar<CR>
+" 可选：一键切换所有三个元素（需要组合调用）
+" 自定义的禅定模式，显示行号和文件栏
+nnoremap <Leader>tz :action ViewToolButtons<CR>:action ViewToolBar<CR>:action ViewStatusBar<CR>
+
+
+" 配合禅定模式使用，显示所有打开的文件标签页
+nmap <leader>e :action RecentFiles<CR>
+" 全局切换面板, 可以达到RecentFiles的效果，但是打开后不能使用正则匹配选中文件
+"nmap <leader>e :action Switcher<CR>
+
+noremap <LEADER>h :action ActivateHideActiveToolWindow<CR>
 " 文件结构
 noremap <LEADER>v :action ActivateStructureToolWindow<CR>
 " 终端
 noremap <LEADER>/ :action ActivateTerminalToolWindow<CR>
-" Find Usage
-cnoremap fu :action FindUsages<CR>
+
 " choose run
 nnoremap <Leader>cr :action ChooseRunConfiguration<CR>
 " choose debug
 nnoremap <Leader>cd :action ChooseDebugConfiguration<CR>
 " 重运行
 nnoremap <Leader>rr :action Rerun<CR>
-" nnoremap <Leader>si :action StepInto<CR>
 " 重命令元素
 nnoremap <Leader>re :action RenameElement<CR>
 " 重命名文件
 nnoremap <Leader>rf :action RenameFile<CR>
 
+" 打断点
+nnoremap <Leader>bb :action ToggleLineBreakpoint<CR>
+
+" 查看所有断点
+nnoremap <Leader>bi :action ViewBreakpoints<CR>
+
+" step into
+nnoremap <Leader>si :action StepInto<CR>
+" step out
+nnoremap <Leader>so :action StepOut<CR>
+" step over
+nnoremap so :action StepOver<CR>
+
+" 跳转
+" 跳转到声明
+nnoremap gd :action GotoDeclaration<CR>
+
+" Find Usage
+nnoremap gr :action FindUsages<CR>
+
+" 跳转到实现类
+nnoremap gi :action GotoImplementation<CR>
+
+" 跳转到实体类
+nnoremap <Leader>gc :action GotoClass<CR>
+
+" 跳转到action
+nnoremap <Leader>ga :action GotoAction<CR>
+
+" 跳转到文件
+" nnoremap <Leader>gf :action GotoFile<CR>
+
+" 显示用法
+" nnoremap <Leader>k :action ShowUsages<CR>
+" nnoremap <Leader>k :action ShowDocumentation<CR>
+nnoremap <Leader>k :action QuickJavaDoc<CR>
 
 " Git
 noremap <LEADER>gh :action ActivateVersionControlToolWindow<CR>
