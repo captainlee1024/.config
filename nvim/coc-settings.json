@@ -55,6 +55,7 @@
   "diagnostic.checkCurrentLine": true,
   "diagnostic.virtualTextPrefix": " ❯❯❯ ",
   "diagnostic.virtualText": true,
+	"diagnostic.virtualTextCurrentLineOnly": false,
   "codeLens.enable": true,
   "list.previewHighlightGroup": "Statement",
   "snippets.ultisnips.directories": [
@@ -66,17 +67,17 @@
     "json",
     "javascript",
     "typescript",
-		"vue",
+    "vue",
     "html",
     "css",
     "go",
-		"rust",
-		"python"
+    "rust",
+    "python"
   ],
-	"rust-analyzer.server.path": "/usr/bin/rust-analyzer",
+  "rust-analyzer.server.path": "/usr/bin/rust-analyzer",
   "rust-analyzer.updates.channel": "stable",
   "rust-analyzer.cargo.allFeatures": true,
-	"rust-analyzer.enable": true,
+  "rust-analyzer.enable": true,
   "yaml.format.enable": true,
   "html.format.enable": true,
   "javascript.format.enabled": true,
@@ -86,27 +87,28 @@
   "javascript.suggestionActions.enabled": true,
   "json.format.enable": true,
   "eslint.autoFixOnSave": false,
-	"vetur.validation.interpolation": true,
-	"vetur.experimental.templateInterpolationService": true,
+  "vetur.validation.interpolation": true,
+  "vetur.experimental.templateInterpolationService": true,
   "typescript.format.enabled": true,
   "typescript.suggestionActions.enabled": true,
-	"prettier.printWidth": 100,
-	"prettier.eslintIntegration": true,
-	"prettier.disableLanguages": [],
-	"prettier.formatterPriority": 1,
-	"prettier.useTabs": true,
-	"prettier.trailingComma": "all",
-	"prettier.singleQuote": false,
-	"python.autoComplete.addBrackets": true,
-	"python.jediEnabled": false,
-	"python.formatting.provider": "yapf",
-	"python.formatting.yapfArgs": [
-		"--style",
-		"{SPACES_AROUND_POWER_OPERATOR: True, SPACES_BEFORE_COMMENT: 1}"
-	],
+  "prettier.printWidth": 100,
+  "prettier.eslintIntegration": true,
+  "prettier.disableLanguages": [],
+  "prettier.formatterPriority": 1,
+  "prettier.useTabs": true,
+  "prettier.trailingComma": "all",
+  "prettier.singleQuote": false,
+  "python.autoComplete.addBrackets": true,
+  "python.jediEnabled": false,
+  "python.formatting.provider": "yapf",
+  "python.formatting.yapfArgs": [
+    "--style",
+    "{SPACES_AROUND_POWER_OPERATOR: True, SPACES_BEFORE_COMMENT: 1}"
+  ],
   "signature.target": "float",
   "explorer.width": 38,
-  "explorer.quitOnOpen": true,
+  "explorer.quitOnOpen": false,
+  "explorer.toggle": false,
   "explorer.sources": [
     {
       "name": "buffer",
@@ -121,5 +123,5 @@
   "explorer.file.showHiddenFiles": true,
   "explorer.icon.enableNerdfont": true,
   "explorer.buffer.showHiddenBuffers": false,
-	"clangd.path": "/usr/bin/clangd"
+  "clangd.path": "/usr/bin/clangd"
 }
