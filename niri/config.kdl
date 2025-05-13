@@ -414,9 +414,11 @@ spawn-at-startup "waybar" "-c" "/home/terry/.config/waybar/gruvbox_2/config.json
 // 添加壁纸
 // spawn-at-startup "swaybg" "-o" "DP-4" "-i" "/home/terry/project/manjaro-workspace/wallpaper/gruvbox1.png" "-m" "fill" "-o" "DP-3" "-i" "/home/terry/project/manjaro-workspace/wallpaper/gruvbox1.png" "-m" "fill" "-o" "DP-2" "-i" "/home/terry/project/manjaro-workspace/wallpaper/gruvbox1.png" "-m" "fill"
 
-spawn-at-startup "swaybg" "-i" "/home/terry/project/manjaro-workspace/wallpaper/gruvbox1.png"
-// 竖屏单独设置一个
+//spawn-at-startup "swaybg" "-i" "/home/terry/project/manjaro-workspace/wallpaper/gruvbox1.png"
+// 每个屏幕单独设置吧(可能因为异步的原因, 导致后面的程序可能比前面的限制性导致壁纸被覆盖)
 spawn-at-startup "swaybg" "-o" "DP-2" "-i" "/home/terry/project/manjaro-workspace/wallpaper/frieren-2.png"
+spawn-at-startup "swaybg" "-o" "DP-3" "-i" "/home/terry/project/manjaro-workspace/wallpaper/gruvbox1.png"
+spawn-at-startup "swaybg" "-o" "DP-4" "-i" "/home/terry/project/manjaro-workspace/wallpaper/gruvbox1.png"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
