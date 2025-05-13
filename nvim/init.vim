@@ -42,7 +42,7 @@ source ~/.config/nvim/_settings/04_functions.vim " Load functions before plugins
 " ===
 " === 加载光标配置
 " ===
-source ~/.config/nvim/_settings/cursor_settings.vim
+"source ~/.config/nvim/_settings/cursor_settings.vim
 
 " ===
 " === 插件管理(使用vim-plug) 需要先安装vim-plug

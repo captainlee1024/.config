@@ -77,7 +77,13 @@ noremap <C-J> 5<C-e>
 
 
 " source $XDG_CONFIG_HOME/nvim/cursor.vim
-source ~/.config/nvim/cursor.vim
+"source ~/.config/nvim/cursor.vim
+" ===
+" === 加载光标配置
+" ===
+"source ~/.config/nvim/_settings/cursor_settings.vim
+
+
 
 " ===
 " === Insert Mode Cursor Movement
