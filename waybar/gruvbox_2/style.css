@@ -1,0 +1,298 @@
+* {
+	border: none;
+	font-family: Hack Nerd Font;
+	font-weight: 800;
+	font-size: 13px;
+	min-height: 0;
+}
+
+window#waybar {
+	background: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+tooltip {
+	background: rgba(40, 40, 40, 0.76);
+	border-radius: 4px;
+	border-width: 2px;
+	border-style: solid;
+	border-color: #ebdbb2;
+	color: #ebdbb2;
+}
+
+#workspaces button {
+	border: none;
+	transition-duration: 0.3s;
+	background: none;
+	box-shadow: inherit;
+	text-shadow: inherit;
+	color: #928374;
+	padding: 3px;
+	padding-left: 3px;
+	padding-right: 3px;
+}
+
+#workspaces button.persistent {
+	color: #928374;
+}
+
+#workspaces button.empty {
+	color: #504945;
+}
+
+#workspaces button.special {
+	color: #b8bb26;
+}
+
+#workspaces button.visible {
+	color: #ebdbb2;
+}
+
+#workspaces button:hover {
+	color: #d79921;
+}
+
+#workspaces button.active {
+	color: #ebdbb2;
+}
+
+#workspaces button.urgent {
+	color: #cc241d;
+}
+
+#language,
+#custom-updates, /* weather被注释掉了，updates应该负责左边的闭合*/
+#custom-weather,
+#window,
+#custom-playerctl,
+#clock,
+#battery,
+#pulseaudio,
+#network,
+#workspaces,
+#tray,
+#cava,
+#keyboard-state,
+#idle_inhibitor,
+#custom-power {
+	background: none;
+	padding: 0px 10px;
+	margin: 0px;
+	margin-top: 5px;
+	margin-bottom: 0px;
+}
+
+#tray {
+	background: rgba(40, 40, 40, 0.76);
+	border-radius: 4px;
+	border-width: 2px;
+	border-style: solid;
+	border-color: #ebdbb2;
+	margin-right: 4px;
+	margin-left: 4px;
+	padding-right: 8px;
+	padding-left: 9px;
+	padding-top: 2px;
+	color: #ebdbb2;
+}
+
+#workspaces {
+	background: rgba(40, 40, 40, 0.76);
+	border-radius: 4px;
+	border-width: 2px;
+	border-style: solid;
+	border-color: #ebdbb2;
+	margin-left: 4px;
+	padding-right: 6px;
+	padding-left: 4px;
+}
+
+/* #language { */
+/* 	background: rgba(40, 40, 40, 0.76); */
+/* 	color: #ebdbb2; */
+/* 	border-width: 2px; */
+/* 	border-style: solid; */
+/* 	border-color: #ebdbb2; */
+/* 	border-right: 0px; */
+/* 	border-radius: 4px 0px 0px 4px; */
+/* 	min-width: 24px; */
+/* } */
+
+#custom-language {
+	background: rgba(40, 40, 40, 0.76);
+	color: #ebdbb2;
+	border-width: 2px;
+	border-style: solid;
+	border-color: #ebdbb2;
+	border-right: 0px;
+	border-radius: 4px 0px 0px 4px;
+	min-width: 24px;
+}
+
+#keyboard-state {
+	background: none;
+	color: #ebdbb2;
+	border: none;
+	padding-top: 1px;
+}
+
+#custom-updates {
+	background: rgba(40, 40, 40, 0.76);
+	color: #ebdbb2;
+	/* border-radius: 0px 4px 4px 0px; */
+	border-radius: 4px 4px 4px 4px; /*现在左边就剩update一个组件了，自己左右都圆角闭合吧*/
+	border-width: 2px;
+	/* border-left: 0px;  现在省一个组件了，去除该配置实现闭合*/
+	border-style: solid;
+	border-color: #ebdbb2;
+	/*这里应和最右边的bar的外边距保持一直，所以应该是4px*/
+	margin-left: 4px; /*设置元素的左外边距为0像素，外边距是元素边框以外的空间*/
+	margin-right: 0px; /* 设置元素的右外编剧为4像素，这是该元素的右侧和右屏幕边框的距离，应和niri layout 的 gaps 保持一致, gaps当前是4 */
+	padding-left: 14px; /* 设置元素的右内边距为14像素，内边距是元素内容与其边框之间的空间*/
+}
+
+/* #custom-updates { */
+/* 	background: rgba(40, 40, 40, 0.76); */
+/* 	color: #ebdbb2; */
+/* 	border-radius: 4px 0px 0px 4px; */
+/* 	border-width: 2px; */
+/* 	border-style: solid; */
+/* 	border-color: #ebdbb2; */
+/* 	border-right: 0px; */
+/* 	margin-left: 4px; */
+/* 	padding-right: 7px; */
+/* 	padding-top: 1px; */
+/* } */
+
+#window {
+	background: rgba(40, 40, 40, 0.76);
+	border-width: 2px;
+	border-style: solid;
+	border-color: #ebdbb2;
+	border-radius: 4px;
+	margin-left: 30px;
+	margin-right: 30px;
+	color: #ebdbb2;
+}
+
+#custom-playerctl {
+	background: rgba(40, 40, 40, 0.76);
+	border-width: 2px;
+	border-style: solid;
+	border-color: #ebdbb2;
+	border-right: 0px;
+	border-left: 0px;
+	color: #ebdbb2;
+}
+
+#cava {
+	background: rgba(40, 40, 40, 0.76);
+	border-radius: 4px 0px 0px 4px;
+	border-width: 2px;
+	border-style: solid;
+	border-color: #ebdbb2;
+	border-right: 0px;
+	margin-left: 4px;
+	color: #ebdbb2;
+}
+
+/* hyper/language 注释掉了，需要clock来完成闭合*/
+/* #clock { */
+/* 	background: rgba(40, 40, 40, 0.76); */
+/* 	color: #ebdbb2; */
+/* 	border-width: 2px; */
+/* 	border-style: solid; */
+/* 	border-color: #ebdbb2; */
+/* 	border-radius: 0px; */
+/* 	border-right: 0px; */
+/* 	border-left: 0px; */
+/* } */
+
+#clock {
+	background: rgba(40, 40, 40, 0.76);
+	color: #ebdbb2;
+	border-width: 2px;
+	border-style: solid;
+	border-color: #ebdbb2;
+	border-radius: 0px;
+	border-right: 0px; /* 通过把border-right设置为0px来实现右边开口的效果，右边和其他组件接上 */
+	border-radius: 4px 0px 0px 4px; /* 设置左上角和左下角圆角，右边两个没有设置*/
+}
+
+#network {
+	color: #ebdbb2;
+	border-left: 0px;
+	border-right: 0px;
+}
+
+#pulseaudio {
+	background: rgba(40, 40, 40, 0.76);
+	color: #ebdbb2;
+	border-width: 2px;
+	border-style: solid;
+	border-color: #ebdbb2;
+	border-right: 0px;
+	border-left: 0px;
+	border-radius: 0px;
+}
+
+#pulseaudio.microphone {
+	background: rgba(40, 40, 40, 0.76);
+	color: #ebdbb2;
+	border-width: 2px;
+	border-style: solid;
+	border-color: #ebdbb2;
+	border-radius: 0px 4px 4px 0px;
+	border-left: 0px;
+	margin-right: 4px;
+}
+
+#battery {
+	background: rgba(40, 40, 40, 0.76);
+	color: #ebdbb2;
+	border-width: 2px;
+	border-style: solid;
+	border-color: #ebdbb2;
+	border-radius: 0px;
+	border-right: 0px;
+	border-left: 0px;
+}
+
+#custom-weather {
+	background: rgba(40, 40, 40, 0.76);
+	color: #ebdbb2;
+	border-radius: 4px 0px 0px 4px;
+	border-width: 2px;
+	border-style: solid;
+	border-color: #ebdbb2;
+	border-right: 0px;
+	margin-left: 4px;
+	padding-right: 7px;
+	padding-top: 1px;
+}
+
+#idle_inhibitor {
+	background: rgba(40, 40, 40, 0.76);
+	color: #ebdbb2;
+	border-width: 2px;
+	border-style: solid;
+	border-color: #ebdbb2;
+	border-left: 0px;
+	border-right: 0px;
+	border-radius: 0px;
+	min-width: 18px;
+}
+
+#custom-power {
+	background: rgba(40, 40, 40, 0.76); /* 前三个表示深灰色, 最后一个表示透明度*/
+	color: #ebdbb2; /* 内部文字颜色*/
+	border-width: 2px; /* 元素边框的宽度为2像素*/
+	border-style: solid; /* 设置元素边框为实线*/
+	border-color: #ebdbb2; /* 设置元素边框的颜色与文字颜色相同用*/
+	border-radius: 0px 4px 4px 0px; /* 设置右边两个圆角*/
+	border-left: 0px; /*清除做边框*/
+	margin-left: 0px; /*设置元素的左外边距为0像素，外边距是元素边框以外的空间*/
+	margin-right: 4px; /* 设置元素的右外编剧为4像素，这是该元素的右侧和右屏幕边框的距离，应和niri layout 的 gaps 保持一致, gaps当前是4 */
+	padding-right: 14px; /* 设置元素的右内边距为14像素，内边距是元素内容与其边框之间的空间*/
+}

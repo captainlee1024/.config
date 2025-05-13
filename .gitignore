@@ -34,3 +34,6 @@
 
 # 添加alacritty配置文件
 !/alacritty/
+
+# 添加waybar主题
+!/waybar/
