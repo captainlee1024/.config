@@ -28,3 +28,6 @@
 !/.gitignore
 !/.xmodmap
 !/.ideavimrc
+
+# 添加niri配置文件
+!/niri/
