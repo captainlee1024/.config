@@ -76,7 +76,7 @@
   ],
   "rust-analyzer.server.path": "/usr/bin/rust-analyzer",
   "rust-analyzer.updates.channel": "stable",
-  "rust-analyzer.cargo.allFeatures": true,
+  // "rust-analyzer.cargo.allFeatures": true,
   "rust-analyzer.enable": true,
   "yaml.format.enable": true,
   "html.format.enable": true,
