@@ -56,7 +56,8 @@
   "diagnostic.virtualTextPrefix": " ❯❯❯ ",
   "diagnostic.virtualText": true,
 	"diagnostic.virtualTextCurrentLineOnly": false,
-  "codeLens.enable": true,
+  // "codeLens.enable": true,
+  "codeLens.enable": false,
   "list.previewHighlightGroup": "Statement",
   "snippets.ultisnips.directories": [
     "UltiSnips",
@@ -74,10 +75,10 @@
     "rust",
     "python"
   ],
-  "rust-analyzer.server.path": "/usr/bin/rust-analyzer",
-  "rust-analyzer.updates.channel": "stable",
+  // "rust-analyzer.server.path": "/usr/bin/rust-analyzer",
+  // "rust-analyzer.updates.channel": "stable",
   // "rust-analyzer.cargo.allFeatures": true,
-  "rust-analyzer.enable": true,
+  // "rust-analyzer.enable": true,
   "yaml.format.enable": true,
   "html.format.enable": true,
   "javascript.format.enabled": true,
