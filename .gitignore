@@ -38,3 +38,6 @@
 
 # 添加waybar主题
 !/waybar/
+
+# 添加tmux配置说明
+!/tmux/
