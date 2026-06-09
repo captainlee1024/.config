@@ -146,12 +146,10 @@ Plug 'f-person/pubspec-assist-nvim', { 'for' : ['pubspec.yaml'] }
 " Plug 'arzg/vim-swift'
 
 " Markdown
-Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle', 'for': ['text', 'markdown', 'vim-plug'] }
 Plug 'mzlogin/vim-markdown-toc', { 'for': ['gitignore', 'markdown', 'vim-plug'] }
 Plug 'dkarter/bullets.vim'
-Plug 'vimwiki/vimwiki'
 
 " Other filetypes
 " Plug 'jceb/vim-orgmode', {'for': ['vim-plug', 'org']}
@@ -231,5 +229,4 @@ source ~/.config/nvim/_after/plugin/other.vim
 if has_machine_specific_file == 0
 	exec "e ~/.config/nvim/_machine_specific.vim"
 endif
-
 
