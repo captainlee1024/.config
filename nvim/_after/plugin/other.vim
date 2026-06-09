@@ -253,6 +253,12 @@ let g:vmt_cycle_list_item_markers = 1
 let g:vmt_fence_text = 'TOC'
 let g:vmt_fence_closing_text = '/TOC'
 
+augroup markdown_preview_mappings
+	autocmd!
+	autocmd FileType markdown nnoremap <buffer> <Leader>mp :MarkdownPreview<CR>
+	autocmd FileType markdown nnoremap <buffer> <Leader>ml :execute 'tab terminal leaf -w ' . shellescape(expand('%:p'))<CR>
+augroup END
+
 
 " ===
 " === rnvimr
