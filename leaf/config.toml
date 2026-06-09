@@ -1,0 +1,17 @@
+# leaf configuration
+#
+# Config path:
+#   ~/.config/leaf/config.toml
+#
+# CLI arguments take priority over this file.
+
+theme = "ocean"
+editor = "nvim"
+watch = false
+
+# Keep width unset by default. A fixed width can improve prose readability,
+# but it does not resize Mermaid ASCII diagrams to fit narrow terminals.
+# width = 120
+
+# Extra file types shown in leaf's picker.
+extras = ["txt", "log", "rs", "toml", "yaml", "json"]
