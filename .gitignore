@@ -41,3 +41,6 @@
 
 # 添加tmux配置说明
 !/tmux/
+
+# 添加leaf配置
+!/leaf/
