@@ -82,6 +82,39 @@ nnoremap <Leader>ml :execute 'tab terminal leaf -w ' . shellescape(expand('%:p')
 
 会新开一个 Nvim tab，在里面运行 `leaf -w 当前文件`。
 
+### Nvim tab 中的常用操作
+
+`leaf` 是运行在 Nvim terminal buffer 里的程序，所以按键分两层：
+
+```text
+Nvim tab
+  terminal buffer
+    leaf
+```
+
+刚打开时会自动进入 terminal 模式，按键会直接发送给 leaf。
+
+| 场景 | 快捷键 | 作用 |
+| --- | --- | --- |
+| leaf 内部 | `j` / `↓` | 向下滚动 |
+| leaf 内部 | `k` / `↑` | 向上滚动 |
+| leaf 内部 | `d` / `PgDn` | 向下翻页 |
+| leaf 内部 | `u` / `PgUp` | 向上翻页 |
+| leaf 内部 | `g` | 到顶部 |
+| leaf 内部 | `G` | 到底部 |
+| leaf 内部 | `t` | 打开/关闭 TOC 侧边栏 |
+| leaf 内部 | `/` 或 `Ctrl-f` | 搜索 |
+| leaf 内部 | `n` / `N` | 下一个/上一个搜索结果 |
+| leaf 内部 | `?` | 显示帮助 |
+| leaf 内部 | `q` | 退出 leaf |
+| Nvim terminal | `Ctrl-n` | 从 terminal 模式回到 Nvim normal 模式 |
+| Nvim normal | `tj` | 切到上一个 Nvim tab |
+| Nvim normal | `tk` | 切到下一个 Nvim tab |
+| Nvim normal | `i` | 回到 terminal 模式，继续操作 leaf |
+| Nvim normal | `:tabclose` | 关闭当前 leaf tab |
+
+注意：在 leaf 运行时直接按 `tj` / `tk` 不会切换 Nvim tab，因为按键还在发给 leaf。需要先按 `Ctrl-n` 回到 Nvim normal 模式，再用 `tj` / `tk` 切换标签页。
+
 ## 注意
 
 `width` 配置只是限制正文最大宽度，不能把 Mermaid ASCII 图自动缩放到终端宽度内。复杂 Mermaid 图仍然建议使用 `markdown-preview.nvim` 的浏览器预览。
