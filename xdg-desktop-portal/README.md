@@ -1,6 +1,6 @@
 # xdg-desktop-portal 用户配置
 
-本目录保存由本仓库维护的用户级 `xdg-desktop-portal` 后端选择配置。目前只针对 Niri 会话覆盖截图后端，不修改 GNOME 的默认行为。
+本目录保存由本仓库维护的用户级 `xdg-desktop-portal` 后端选择配置。目前只针对 Niri 会话覆盖截图和屏幕共享后端，不修改 GNOME 的默认行为。
 
 ## 目录部署方式
 
@@ -39,7 +39,7 @@ default=gnome;gtk;
 org.freedesktop.impl.portal.Access=gtk;
 org.freedesktop.impl.portal.Notification=gtk;
 org.freedesktop.impl.portal.Secret=gnome-keyring;
-org.freedesktop.impl.portal.ScreenCast=gnome;
+org.freedesktop.impl.portal.ScreenCast=wlr;
 org.freedesktop.impl.portal.Screenshot=wlr;
 ```
 
@@ -66,11 +66,31 @@ GDBus.Error:org.freedesktop.DBus.Error.Failed: internal error
 org.freedesktop.impl.portal.Screenshot=wlr;
 ```
 
-Niri 支持 `wlr-screencopy`，所以 wlr Portal 可以获取三显示器画面。屏幕共享仍显式使用 Niri 官方推荐的 GNOME 后端：
+Niri 支持 `wlr-screencopy`，所以 wlr Portal 可以获取三显示器画面。
+
+Zoom 7.1.5 在 Niri 26.04 下通过 GNOME ScreenCast Portal 发起共享时，本地可以选择显示器并显示正在共享，但远端参会者收不到画面。日志显示 Niri 已创建 PipeWire 流，随后格式协商失败：
+
+```text
+Paused -> Error("no more input formats")
+pw.link ... negotiating -> error no more input formats
+```
+
+测试 `force-pipewire-invalid-modifier` 后错误仍然存在，因此没有保留该 Niri debug 选项。
+
+最终把 Niri 的 ScreenCast 接口也切换到 wlr Portal：
 
 ```ini
-org.freedesktop.impl.portal.ScreenCast=gnome;
+org.freedesktop.impl.portal.ScreenCast=wlr;
 ```
+
+修改后，`zoom-host` 在 Niri 原生 Wayland 模式下发起共享，远端参会者可以正常看到画面。因此 Niri 当前的两个屏幕相关接口都走 wlr：
+
+```text
+Screenshot -> xdg-desktop-portal-wlr -> Flameshot
+ScreenCast -> xdg-desktop-portal-wlr -> Zoom
+```
+
+该覆盖会影响 Niri 会话中所有使用标准 ScreenCast Portal 的应用，而不只影响 Zoom。wlr Portal 更偏向输出/显示器捕获；Niri 的 GNOME Portal 所提供的窗口选择、动态 Cast Target 等高级能力可能不可用。如果以后其他录屏或会议软件需要这些功能，应重新测试后端取舍。
 
 ## 为什么不会影响 GNOME
 
@@ -169,6 +189,14 @@ readlink -f ~/.config/xdg-desktop-portal
 QT_QPA_PLATFORM=wayland flameshot gui
 ```
 
+在 Niri 下测试 Zoom 发起共享：
+
+```bash
+zoom-host
+```
+
+进入会议、选择显示器并开始共享后，需要由另一位参会者确认远端画面确实可见。只看到本地“正在共享”状态不足以证明视频帧已经成功发送。
+
 检查 Portal 和 Flameshot 日志：
 
 ```bash
@@ -189,7 +217,7 @@ diff -u \
 已知的预期差异包括显式指定：
 
 ```ini
-org.freedesktop.impl.portal.ScreenCast=gnome;
+org.freedesktop.impl.portal.ScreenCast=wlr;
 org.freedesktop.impl.portal.Screenshot=wlr;
 ```
 

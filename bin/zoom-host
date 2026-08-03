@@ -1,0 +1,44 @@
+#!/bin/sh
+
+set -eu
+
+zoom_config_home=${XDG_CONFIG_HOME:-"$HOME/.config"}
+zoom_config="$zoom_config_home/zoomus.conf"
+
+if [ ! -f "$zoom_config" ]; then
+    printf 'zoom-host: Zoom config not found: %s\n' "$zoom_config" >&2
+    exit 1
+fi
+
+key_count=$(grep -c '^xwayland=' "$zoom_config" || true)
+if [ "$key_count" -ne 1 ]; then
+    printf 'zoom-host: expected exactly one xwayland= setting in %s, found %s\n' \
+        "$zoom_config" "$key_count" >&2
+    exit 1
+fi
+
+if pgrep -x zoom >/dev/null 2>&1 || pgrep -x ZoomWebviewHost >/dev/null 2>&1; then
+    printf '%s\n' 'zoom-host: stopping the existing Zoom session...'
+    pkill -TERM -x ZoomWebviewHost 2>/dev/null || true
+    pkill -TERM -x zoom 2>/dev/null || true
+
+    attempts=50
+    while [ "$attempts" -gt 0 ]; do
+        if ! pgrep -x zoom >/dev/null 2>&1 && \
+           ! pgrep -x ZoomWebviewHost >/dev/null 2>&1; then
+            break
+        fi
+        sleep 0.1
+        attempts=$((attempts - 1))
+    done
+
+    if pgrep -x zoom >/dev/null 2>&1 || pgrep -x ZoomWebviewHost >/dev/null 2>&1; then
+        printf '%s\n' 'zoom-host: Zoom did not exit; configuration was not changed.' >&2
+        exit 1
+    fi
+fi
+
+sed -i 's/^xwayland=.*/xwayland=false/' "$zoom_config"
+
+printf '%s\n' 'zoom-host: starting Zoom host/share mode (native Wayland).'
+exec env QT_QPA_PLATFORM=wayland /usr/bin/zoom "$@"

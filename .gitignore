@@ -53,3 +53,6 @@
 
 # 经过验证并由本仓库维护的用户级 desktop 启动项
 !/applications/
+
+# 链接到 ~/.local/bin 的用户级命令
+!/bin/
