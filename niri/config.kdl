@@ -120,37 +120,37 @@ input {
 // 		position x=4480 y=0 //设置输出在全局坐标中的位置
 // }
 
-output "DP-4" {
+output "DP-3" {
     mode "1920x1080@60.000"
 		scale 1.0
 		transform "normal" // 旋转多少度，逆时针旋转输出, 第二个屏幕没有旋转
 		// position x=5120 y=0 //设置输出在全局坐标中的位置 3840/1.5 + 3840/1.5
 		// 两个4K显示器缩放为1.5时的position
-		position x=4000 y=0 //设置输出在全局坐标中的位置 2160/1.5 + 3840/1.5 = 4000
+		// position x=4000 y=0 //设置输出在全局坐标中的位置 2160/1.5 + 3840/1.5 = 4000
 		// 两个4k显示器缩放为1时的position
-		//position x=6000 y=0 // 2160 + 3840 = 6000
+		position x=6000 y=0 // 2160 + 3840 = 6000
 		// 1.44 缩放下的dp-4的position
 		//position x=4166 y=0 // 2160 / 1.44 + 3840/1.44 = 1500 + 2666.6 = 4166
 }
 
-output "DP-3" {
+output "DP-2" {
     mode "3840x2160@59.997"
-		scale 1.5
-		//scale 1.0
+		// scale 1.5
+		scale 1.0
 		//scale 1.44
 		transform "normal" // 旋转多少度，逆时针旋转输出, 第二个屏幕没有旋转
 		// position x=2560 y=0 //设置输出在全局坐标中的位置 3840/1.5
-		position x=1440 y=0 //设置输出在全局坐标中的位置 2160/1.5 = 1440
+		// position x=1440 y=0 //设置输出在全局坐标中的位置 2160/1.5 = 1440
 		// dp-2 缩放为1时的position
-		// position x=2160 y=0 //设置输出在全局坐标中的位置 2160= 2160
+		position x=2160 y=0 //设置输出在全局坐标中的位置 2160= 2160
 		// 1.44缩放下的position
 		//position x=1500 y=0 //设置输出在全局坐标中的位置 2160 / 1.44 = 1500
 }
 
-output "DP-2" {
+output "DP-1" {
     mode "3840x2160@59.997" //分辨率和刷新率
-		scale 1.5
-		// scale 1.0
+		// scale 1.5
+		scale 1.0
 		//scale 1.44
 		transform "270" // 旋转多少度，逆时针旋转输出
 		position x=0 y=0 //设置输出在全局坐标中的位置
@@ -416,9 +416,9 @@ spawn-at-startup "waybar" "-c" "/home/terry/.config/waybar/gruvbox_2/config.json
 
 //spawn-at-startup "swaybg" "-i" "/home/terry/project/manjaro-workspace/wallpaper/gruvbox1.png"
 // 每个屏幕单独设置吧(可能因为异步的原因, 导致后面的程序可能比前面的限制性导致壁纸被覆盖)
-spawn-at-startup "swaybg" "-o" "DP-2" "-i" "/home/terry/project/manjaro-workspace/wallpaper/frieren-2.png"
+spawn-at-startup "swaybg" "-o" "DP-1" "-i" "/home/terry/project/manjaro-workspace/wallpaper/frieren-2.png"
+spawn-at-startup "swaybg" "-o" "DP-2" "-i" "/home/terry/project/manjaro-workspace/wallpaper/gruvbox1.png"
 spawn-at-startup "swaybg" "-o" "DP-3" "-i" "/home/terry/project/manjaro-workspace/wallpaper/gruvbox1.png"
-spawn-at-startup "swaybg" "-o" "DP-4" "-i" "/home/terry/project/manjaro-workspace/wallpaper/gruvbox1.png"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.
