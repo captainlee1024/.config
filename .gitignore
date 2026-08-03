@@ -44,3 +44,12 @@
 
 # 添加leaf配置
 !/leaf/
+
+# 添加自研PR review插件调研
+!/pr-review.nvim/
+
+# xdg-desktop-portal 用户级后端选择
+!/xdg-desktop-portal/
+
+# 经过验证并由本仓库维护的用户级 desktop 启动项
+!/applications/
