@@ -155,8 +155,23 @@ show_status() {
         "$saved_profile" "$dms_status" "$waybar_status" "$mako_status"
 }
 
+open_launcher() {
+    case "$(read_profile)" in
+        dms)
+            systemctl --user is-active --quiet dms.service || \
+                die "DMS profile is selected but dms.service is not active"
+            /usr/bin/dms ipc call spotlight toggle >/dev/null || \
+                die "failed to toggle DMS Spotlight"
+            ;;
+        classic)
+            /usr/bin/niri msg action spawn -- /usr/bin/fuzzel >/dev/null || \
+                die "failed to start Fuzzel"
+            ;;
+    esac
+}
+
 usage() {
-    printf '%s\n' 'usage: desktop-profile {start|dms|classic|toggle|status}' >&2
+    printf '%s\n' 'usage: desktop-profile {start|dms|classic|toggle|status|launcher}' >&2
     exit 2
 }
 
@@ -188,6 +203,9 @@ case "$1" in
         ;;
     status)
         show_status
+        ;;
+    launcher)
+        open_launcher
         ;;
     *)
         usage

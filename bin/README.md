@@ -61,9 +61,10 @@ desktop-profile dms
 desktop-profile classic
 desktop-profile toggle
 desktop-profile status
+desktop-profile launcher
 ```
 
-脚本使用软件包自带的 `dms.service` 管理 DMS，并通过 Niri 启动 Classic 组件；不会修改字体、字号或显示器配置。完整架构、安装方式和恢复流程见 `../niri/README.md`。
+脚本使用软件包自带的 `dms.service` 管理 DMS，并通过 Niri 启动 Classic 组件；`launcher` 会在 DMS 模式显示 DMS Spotlight，在 Classic 模式启动 Fuzzel。它不会修改字体、字号或显示器配置。完整架构、安装方式和恢复流程见 `../niri/README.md`。
 
 ## 背景
 

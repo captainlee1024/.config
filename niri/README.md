@@ -92,6 +92,7 @@ desktop-profile classic  # 切换到 Waybar + Fuzzel + Mako
 desktop-profile toggle   # 在两种模式间切换
 desktop-profile status   # 显示保存状态与实际进程状态
 desktop-profile start    # 登录时恢复上次模式，主要供 Niri 调用
+desktop-profile launcher # 按当前模式打开 DMS Spotlight 或 Fuzzel
 ```
 
 当前模式保存在：
@@ -108,7 +109,7 @@ Niri 的固定自启动入口是：
 spawn-at-startup "/home/terry/.local/bin/desktop-profile" "start"
 ```
 
-也可以按 `Mod+Shift+B` 快速切换两种模式。
+也可以按 `Mod+Shift+B` 快速切换两种模式。`Mod+D` 通过同一个脚本读取当前模式：DMS 模式调用已经常驻的 DMS Spotlight，Classic 模式启动 Fuzzel。脚本只在按键时短暂运行，不新增常驻进程。
 
 ### DMS 常用命令
 
@@ -164,7 +165,7 @@ niri 横向排列“列”，同一列中可以纵向放置多个窗口。理解
 | --- | --- | --- |
 | `Mod+Shift+/`（通常显示为 `Mod+?`） | 打开快捷键帮助 | 显示 niri 内置的快捷键浮层。 |
 | `Mod+T` | 打开终端 | 启动 Alacritty。 |
-| `Mod+D` | 打开程序启动器 | 启动 Fuzzel，用于搜索并运行应用。 |
+| `Mod+D` | 打开当前模式的程序启动器 | DMS 模式显示 DMS Spotlight；Classic 模式启动 Fuzzel。 |
 | `Super+Alt+L` | 锁定屏幕 | 启动 Swaylock；这里写死的是 `Super`，不是 `Mod`。 |
 | `Mod+Q` | 关闭窗口 | 关闭当前聚焦窗口。 |
 | `Mod+Escape` | 切换快捷键抑制 | 远程桌面或软件 KVM 接管快捷键时，用它恢复或重新允许接管。这个组合始终由 niri 处理。 |
