@@ -2,9 +2,10 @@
 
 本目录保存经过排查、希望在重装后恢复，并准备逐个链接到 `~/.local/bin` 的用户命令。
 
-当前只管理 Zoom 的两种临时运行模式：
+当前管理：
 
 ```text
+desktop-profile
 zoom-host
 zoom-watch
 ```
@@ -37,9 +38,32 @@ zoom-watch
 
 ~/.local/bin/zoom-watch
   -> /home/terry/project/manjaro-workspace/.config/bin/zoom-watch
+
+~/.local/bin/desktop-profile
+  -> /home/terry/project/manjaro-workspace/.config/bin/desktop-profile
 ```
 
 `~/.local/bin` 已经位于本机 `PATH`，无需添加 alias 或修改 `.zshrc`。
+
+## `desktop-profile`
+
+用于在 Niri 会话中管理两套 Desktop Shell：
+
+```text
+DMS     -> DMS 状态栏、启动器和通知
+Classic -> Waybar gruvbox_2、Fuzzel 和 Mako
+```
+
+常用命令：
+
+```bash
+desktop-profile dms
+desktop-profile classic
+desktop-profile toggle
+desktop-profile status
+```
+
+脚本使用软件包自带的 `dms.service` 管理 DMS，并通过 Niri 启动 Classic 组件；不会修改字体、字号或显示器配置。完整架构、安装方式和恢复流程见 `../niri/README.md`。
 
 ## 背景
 
@@ -204,7 +228,7 @@ Arch/Manjaro 基础系统通常已经提供这些工具。
 
 ## 新系统部署
 
-安装 Zoom、克隆仓库并确认目标名称没有冲突后：
+安装所需软件、克隆仓库并确认目标名称没有冲突后：
 
 ```bash
 mkdir -p ~/.local/bin
@@ -216,12 +240,17 @@ ln -s \
 ln -s \
   /home/terry/project/manjaro-workspace/.config/bin/zoom-watch \
   ~/.local/bin/zoom-watch
+
+ln -s \
+  /home/terry/project/manjaro-workspace/.config/bin/desktop-profile \
+  ~/.local/bin/desktop-profile
 ```
 
 脚本目标必须具有可执行权限：
 
 ```bash
 chmod +x \
+  /home/terry/project/manjaro-workspace/.config/bin/desktop-profile \
   /home/terry/project/manjaro-workspace/.config/bin/zoom-host \
   /home/terry/project/manjaro-workspace/.config/bin/zoom-watch
 ```
@@ -233,6 +262,7 @@ chmod +x \
 ```bash
 command -v zoom-host
 command -v zoom-watch
+command -v desktop-profile
 ```
 
 预期：
@@ -240,6 +270,7 @@ command -v zoom-watch
 ```text
 /home/terry/.local/bin/zoom-host
 /home/terry/.local/bin/zoom-watch
+/home/terry/.local/bin/desktop-profile
 ```
 
 检查链接：
@@ -247,6 +278,7 @@ command -v zoom-watch
 ```bash
 readlink -f ~/.local/bin/zoom-host
 readlink -f ~/.local/bin/zoom-watch
+readlink -f ~/.local/bin/desktop-profile
 ```
 
 Shell 语法检查：
@@ -254,6 +286,7 @@ Shell 语法检查：
 ```bash
 sh -n ~/.local/bin/zoom-host
 sh -n ~/.local/bin/zoom-watch
+sh -n ~/.local/bin/desktop-profile
 ```
 
 运行某个模式后检查配置：

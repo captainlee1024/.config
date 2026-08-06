@@ -32,12 +32,19 @@
 
 # 添加niri配置文件
 !/niri/
+# DMS 会在首次运行时自动生成这些 KDL 片段；当前主配置不 include，交由 DMS 重建
+/niri/dms/
 
 # 添加alacritty配置文件
 !/alacritty/
 
 # 添加waybar主题
 !/waybar/
+
+# DMS 个人设置和已选主题；首次运行标记由 DMS 自动重建
+!/DankMaterialShell/
+/DankMaterialShell/.firstlaunch
+/DankMaterialShell/.changelog-*
 
 # 添加tmux配置说明
 !/tmux/

@@ -1,5 +1,6 @@
-Niri配置暂时先不使用同软链接的方式
-配置有变更是，删除仓库中的配置，cp最新的niri配置到仓库里，以进行配置的更新维护
+# Niri 配置
+
+当前 `~/.config/niri` 使用软链接指向本仓库中的 `niri/`，因此修改仓库中的配置就是修改实际生效的配置。
 
 ## 如何使用
 
@@ -16,6 +17,131 @@ mv ./niri ./_niri_bac
 ```bash
 ln -s "$(pwd)/niri" ~/.config/niri
 ```
+
+## Desktop Shell 架构
+
+Niri 只负责窗口管理；状态栏、启动器和通知由独立的 Desktop Shell 组件负责。目前保留两套模式：
+
+| 模式 | 状态栏 | 启动器 | 通知 |
+| --- | --- | --- | --- |
+| DMS（当前模式） | DMS | DMS | DMS |
+| Classic（保留备用） | Waybar `gruvbox_2` | Fuzzel | Mako |
+
+暂不引入 iNiR，也不拆分 `niri/config.kdl`。DMS 的状态栏、启动器、通知、音量、网络和托盘均已验证可用；当前主题是 `Gruvbox Multi / Mat. H / Green`，GTK/Qt 系统主题同步保持关闭。
+
+`desktop-profile` 负责切换并记住当前模式。Niri 登录时只调用一次 `desktop-profile start`，不再直接启动 Waybar 或 Mako。状态文件不存在时默认使用 DMS。
+
+### DMS 的安装与配置归属
+
+DMS 使用 Arch/Manjaro 官方软件包安装：
+
+```bash
+sudo pacman -S dms-shell-niri
+```
+
+新版软件包分为两层：
+
+- `dms-shell` 是共用的 DMS 主程序。
+- `dms-shell-niri` 是 Niri 对应的适配/依赖包，并提供虚拟依赖 `dms-shell-compositor`。
+
+程序文件由 Pacman 管理：
+
+- 命令：`/usr/bin/dms`
+- DMS/Quickshell 程序文件：`/usr/share/quickshell/dms/`
+- systemd 用户服务：`/usr/lib/systemd/user/dms.service`
+
+这些程序文件不复制进 dotfiles，也不创建 `~/.config/quickshell/dms/`。升级统一使用 `sudo pacman -Syu`。
+
+DMS 的个人设置目录已经软链接到本仓库：
+
+```text
+~/.config/DankMaterialShell
+  -> /home/terry/project/manjaro-workspace/.config/DankMaterialShell
+```
+
+仓库跟踪：
+
+```text
+DankMaterialShell/
+├── settings.json
+└── themes/
+    ├── gruvboxMaterial/
+    └── gruvboxMulti/
+```
+
+以后通过 DMS 设置界面修改选项时，会直接更新仓库中的 `settings.json`，Git 只记录变化，不会自动提交。`.firstlaunch`、`.changelog-*`、缓存和运行状态不纳入仓库，它们会由 DMS 自动重建。
+
+DMS 还会自动生成 `~/.config/niri/dms/`。当前 `niri/config.kdl` 没有 include 这些文件，所以它们不会改变现有布局、字体、字号、分辨率或缩放；这些自动生成文件已被 Git 忽略。
+
+最终职责边界：
+
+```text
+~/.config/niri/                 -> 本仓库 niri/，管理 Niri
+~/.config/waybar/               -> 本仓库 waybar/，管理 Classic 状态栏主题
+~/.config/DankMaterialShell/    -> 本仓库 DankMaterialShell/，管理 DMS 个人设置和主题
+~/.local/bin/desktop-profile    -> 本仓库 bin/desktop-profile
+```
+
+运行时，Waybar 与 DMS 状态栏二选一，Mako 与 DMS 通知服务二选一。切换只控制进程，不搬动或覆盖配置文件。DMS 使用软件包自带的 `dms.service`，但该服务保持 `disabled`，只由 `desktop-profile` 按需启动和停止。
+
+### 模式切换命令
+
+```bash
+desktop-profile dms      # 切换到 DMS
+desktop-profile classic  # 切换到 Waybar + Fuzzel + Mako
+desktop-profile toggle   # 在两种模式间切换
+desktop-profile status   # 显示保存状态与实际进程状态
+desktop-profile start    # 登录时恢复上次模式，主要供 Niri 调用
+```
+
+当前模式保存在：
+
+```text
+~/.local/state/desktop-profile/current
+```
+
+该文件只包含 `dms` 或 `classic`，属于运行状态，不提交到仓库。切换脚本经过 `DMS -> Classic -> DMS` 往返验证，并避免重复启动状态栏或通知服务。
+
+Niri 的固定自启动入口是：
+
+```kdl
+spawn-at-startup "/home/terry/.local/bin/desktop-profile" "start"
+```
+
+也可以按 `Mod+Shift+B` 快速切换两种模式。
+
+### DMS 常用命令
+
+检查安装和依赖：
+
+```bash
+dms doctor
+```
+
+```bash
+dms ipc call spotlight toggle       # 打开启动器
+dms ipc call settings focusOrToggle # 打开设置
+dms restart                         # 重启 DMS
+```
+
+正常切换不要直接执行 `dms kill` 或 `pkill`，统一使用 `desktop-profile`，否则保存的模式可能与实际进程不一致。
+
+### 新系统恢复
+
+安装 DMS、克隆本仓库并确认目标不存在后，建立两个链接：
+
+```bash
+ln -s /home/terry/project/manjaro-workspace/.config/DankMaterialShell ~/.config/DankMaterialShell
+ln -s /home/terry/project/manjaro-workspace/.config/bin/desktop-profile ~/.local/bin/desktop-profile
+```
+
+然后执行：
+
+```bash
+desktop-profile dms
+```
+
+缓存、运行状态和 `niri/dms/` 会自动重新生成。当前不执行 `dms setup`，不全局启用 `dms.service`，也不让 DMS 管理显示器输出。
 
 ## 快捷键
 

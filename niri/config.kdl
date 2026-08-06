@@ -357,8 +357,9 @@ layout {
 
 
 
-// 启动mako
-spawn-at-startup "mako"
+// Desktop Shell 由 desktop-profile 统一选择：DMS 或 Waybar + Mako
+// 状态保存在 ~/.local/state/desktop-profile/current，默认使用 DMS
+spawn-at-startup "/home/terry/.local/bin/desktop-profile" "start"
 
 // 启动Xwayland
 // 支持运行X11应用
@@ -405,11 +406,10 @@ environment {
                                         // Java 的 Wayland 原生支持仍在发展，通常默认走 XWayland。
 }
 
-// 启动waybar
-//spawn-at-startup "waybar"
+// Waybar 由 desktop-profile 在 Classic 模式下启动
 // 添加主题给waybar
 // spawn-at-startup "waybar" "-c" "/home/terry/.config/waybar/gruvbox_1/config.jsonc" "-s" "/home/terry/.config/waybar/gruvbox_1/style.css"
-spawn-at-startup "waybar" "-c" "/home/terry/.config/waybar/gruvbox_2/config.jsonc" "-s" "/home/terry/.config/waybar/gruvbox_2/style.css"
+// 当前 Classic 使用 gruvbox_2，具体启动命令见 ~/.local/bin/desktop-profile
 
 // 添加壁纸
 // spawn-at-startup "swaybg" "-o" "DP-4" "-i" "/home/terry/project/manjaro-workspace/wallpaper/gruvbox1.png" "-m" "fill" "-o" "DP-3" "-i" "/home/terry/project/manjaro-workspace/wallpaper/gruvbox1.png" "-m" "fill" "-o" "DP-2" "-i" "/home/terry/project/manjaro-workspace/wallpaper/gruvbox1.png" "-m" "fill"
@@ -508,6 +508,7 @@ binds {
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+T { spawn "alacritty"; }
     Mod+D { spawn "fuzzel"; }
+    Mod+Shift+B hotkey-overlay-title="切换 Desktop Shell" { spawn "/home/terry/.local/bin/desktop-profile" "toggle"; }
     Super+Alt+L { spawn "swaylock"; }
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.

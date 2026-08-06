@@ -1,0 +1,195 @@
+#!/bin/sh
+
+set -eu
+
+profile_config_home=${XDG_CONFIG_HOME:-"$HOME/.config"}
+profile_state_home=${XDG_STATE_HOME:-"$HOME/.local/state"}
+profile_state_dir="$profile_state_home/desktop-profile"
+profile_state_file="$profile_state_dir/current"
+profile_lock_file="$profile_state_dir/lock"
+
+waybar_config="$profile_config_home/waybar/gruvbox_2/config.jsonc"
+waybar_style="$profile_config_home/waybar/gruvbox_2/style.css"
+
+die() {
+    printf 'desktop-profile: %s\n' "$*" >&2
+    exit 1
+}
+
+is_running() {
+    pgrep -x "$1" >/dev/null 2>&1
+}
+
+wait_for_exit() {
+    process_name=$1
+    attempts=50
+
+    while [ "$attempts" -gt 0 ] && is_running "$process_name"; do
+        sleep 0.1
+        attempts=$((attempts - 1))
+    done
+
+    ! is_running "$process_name"
+}
+
+wait_for_start() {
+    process_name=$1
+    attempts=30
+
+    while [ "$attempts" -gt 0 ] && ! is_running "$process_name"; do
+        sleep 0.1
+        attempts=$((attempts - 1))
+    done
+
+    is_running "$process_name"
+}
+
+stop_process() {
+    process_name=$1
+
+    if ! is_running "$process_name"; then
+        return 0
+    fi
+
+    pkill -TERM -x "$process_name" 2>/dev/null || true
+    wait_for_exit "$process_name" || die "$process_name did not stop"
+}
+
+write_profile() {
+    selected_profile=$1
+    profile_tmp=$(mktemp "$profile_state_dir/current.XXXXXX")
+    printf '%s\n' "$selected_profile" >"$profile_tmp"
+    mv -f -- "$profile_tmp" "$profile_state_file"
+}
+
+read_profile() {
+    if [ -r "$profile_state_file" ]; then
+        selected_profile=$(sed -n '1p' "$profile_state_file")
+        case "$selected_profile" in
+            classic | dms)
+                printf '%s\n' "$selected_profile"
+                return 0
+                ;;
+        esac
+    fi
+
+    printf '%s\n' dms
+}
+
+stop_classic() {
+    stop_process waybar
+    stop_process mako
+}
+
+stop_dms() {
+    systemctl --user stop dms.service >/dev/null 2>&1 || true
+    /usr/bin/dms kill >/dev/null 2>&1 || true
+    wait_for_exit dms || die "DMS did not stop"
+}
+
+start_mako() {
+    if is_running mako; then
+        return 0
+    fi
+
+    /usr/bin/niri msg action spawn -- /usr/bin/mako >/dev/null
+    wait_for_start mako || die "Mako failed to start"
+}
+
+start_waybar() {
+    if is_running waybar; then
+        return 0
+    fi
+
+    [ -r "$waybar_config" ] || die "Waybar config not found: $waybar_config"
+    [ -r "$waybar_style" ] || die "Waybar style not found: $waybar_style"
+
+    /usr/bin/niri msg action spawn -- \
+        /usr/bin/waybar -c "$waybar_config" -s "$waybar_style" >/dev/null
+    wait_for_start waybar || die "Waybar failed to start"
+}
+
+activate_classic() {
+    stop_dms
+    start_mako
+    start_waybar
+    write_profile classic
+    printf '%s\n' 'desktop-profile: active profile is classic'
+}
+
+activate_dms() {
+    stop_classic
+
+    if ! systemctl --user is-active --quiet dms.service; then
+        /usr/bin/dms kill >/dev/null 2>&1 || true
+        if ! systemctl --user start dms.service; then
+            start_mako
+            start_waybar
+            write_profile classic
+            die "DMS failed to start; restored classic"
+        fi
+    fi
+
+    systemctl --user is-active --quiet dms.service || die "dms.service is not active"
+    write_profile dms
+    printf '%s\n' 'desktop-profile: active profile is dms'
+}
+
+show_status() {
+    saved_profile=$(read_profile)
+    dms_status=inactive
+    waybar_status=inactive
+    mako_status=inactive
+
+    if systemctl --user is-active --quiet dms.service || is_running dms; then
+        dms_status=active
+    fi
+    if is_running waybar; then
+        waybar_status=active
+    fi
+    if is_running mako; then
+        mako_status=active
+    fi
+
+    printf 'saved=%s dms=%s waybar=%s mako=%s\n' \
+        "$saved_profile" "$dms_status" "$waybar_status" "$mako_status"
+}
+
+usage() {
+    printf '%s\n' 'usage: desktop-profile {start|dms|classic|toggle|status}' >&2
+    exit 2
+}
+
+[ "$#" -eq 1 ] || usage
+
+umask 077
+mkdir -p "$profile_state_dir"
+exec 9>"$profile_lock_file"
+flock -w 10 9 || die "another profile switch is already running"
+
+case "$1" in
+    start)
+        case "$(read_profile)" in
+            dms) activate_dms ;;
+            classic) activate_classic ;;
+        esac
+        ;;
+    dms)
+        activate_dms
+        ;;
+    classic)
+        activate_classic
+        ;;
+    toggle)
+        case "$(read_profile)" in
+            dms) activate_classic ;;
+            classic) activate_dms ;;
+        esac
+        ;;
+    status)
+        show_status
+        ;;
+    *)
+        usage
+        ;;
+esac
