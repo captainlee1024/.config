@@ -1,5 +1,8 @@
 # Niri 配置
 
+> [!WARNING]
+> Niri 是轻量级 Wayland 合成器，不提供类似 GNOME `org.gnome.system.proxy` 的统一代理与绕过配置。当前用户会话通过 `~/.config/environment.d/proxy.conf` 向支持环境变量的程序提供 `HTTP_PROXY`、`HTTPS_PROXY`、`ALL_PROXY` 和 `NO_PROXY`；该文件可能包含公司域名等隐私信息，真实配置及其维护工具统一放在仓库内已整体忽略的 `environment.d/` 私密目录中，并只把这一个文件软链接到实际配置位置。
+
 当前 `~/.config/niri` 使用软链接指向本仓库中的 `niri/`，因此修改仓库中的配置就是修改实际生效的配置。
 
 ## 如何使用
